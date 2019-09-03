@@ -18,3 +18,17 @@ class User(models.Model):
             return self.auth_user.username
     class Meta:
         ordering = ["name"]
+       
+
+class Location(models.Model):
+    state = models.CharField(max_length = 50, blank = False, null = False, unique = False)
+    district = models.CharField(max_length = 50, blank = False, null = False, unique = False)
+    block_name = models.CharField(max_length = 50, blank = False, null = False, unique = False)
+    village_name = models.CharField(max_length = 100, blank = False, null = False, unique = False)
+    longitude = models.CharField(max_length = 100, blank = False, null = False, unique = False)
+    latitude = models.CharField(max_length = 100, blank = False, null = False, unique = False)
+    acq_Date = models.DateTimeField(default = timezone.now)
+    acq_Time = models.DateTimeField(default = timezone.now)
+    ddo = models.ForeignKey(User, on_delete = models.CASCADE, blank = True, null = True, related_name = 'ddo')        
+    ado = models.ForeignKey(User, on_delete = models.CASCADE, blank = True, null = True, default = 'null', related_name = 'ado')
+    typeofChoice = models.CharField(max_length = 10, choices = status, default = 'pending')     
